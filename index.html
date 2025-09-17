@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyzeN Solutions - Automação Inteligente</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid #333;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.nav-brand i {
+  margin-right: 0.5rem;
+  font-size: 2rem;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+  color: #007bff;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #ffffff;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(0, 123, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 123, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(0, 123, 255, 0.05) 0%, transparent 50%);
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: #007bff;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  max-width: 800px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+  line-height: 1.5;
+  animation: slideInLeft 1s ease-out 0.3s both;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateX(0);
+  }
+}
+
+.hero-description {
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  color: #e0e0e0;
+  line-height: 1.7;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: slideInRight 1s ease-out 0.6s both;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.btn-secondary:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.features {
+  padding: 5rem 0;
+  background: #111111;
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #007bff;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #333;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 123, 255, 0.1);
+}
+
+.feature-icon {
+  font-size: 7rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.feature-card p {
+  color: #cccccc;
+  margin-bottom: 1.5rem;
+}
+
+.feature-card ul {
+  list-style: none;
+}
+
+.feature-card li {
+  color: #cccccc;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.feature-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.benefits {
+  padding: 5rem 0;
+  background: #000000;
+}
+
+.benefits h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #ffffff;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.benefit-card {
+  text-align: center;
+  padding: 2rem;
+  background: #111111;
+  border-radius: 15px;
+  border: 1px solid #333;
+  transition: all 0.3s;
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  border-color: #007bff;
+}
+
+.benefit-card i {
+  font-size: 3rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.benefit-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.benefit-card p {
+  color: #cccccc;
+}
+
+.pricing {
+  padding: 5rem 0;
+  background: #111111;
+}
+
+.pricing h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #007bff;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  padding: 2rem;
+  border-radius: 25px;
+  border: 2px solid transparent;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+
+.pricing-card:nth-child(1) {
+  background: #2a0b1f;
+  border-color: #2a0b1f; 
+}
+
+
+.pricing-card:nth-child(2) {
+  background: rgba(40, 167, 69, 0.15);
+  border-color: rgba(40, 167, 69, 0.3);
+}
+
+.pricing-card:nth-child(3) {
+  background: #041b3b;
+  border-color: #041b3b; 
+}
+
+
+.pricing-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.pricing-card:focus-within {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.pricing-card.featured {
+  transform: scale(1.05);
+  border-color: #002a26; 
+  background: #002a26;
+}
+
+
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+.pricing-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.price {
+  margin-bottom: 2rem;
+}
+
+.currency {
+  font-size: 1.2rem;
+  color: #cccccc;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.period {
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+.pricing-card ul {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.pricing-card li {
+  padding: 0.5rem 0;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.pricing-card li:last-child {
+  border-bottom: none;
+}
+
+.pricing-button {
+  width: 100%;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pricing-button:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+}
+
+.pricing-button:focus {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}
+
+.testimonials {
+  padding: 5rem 0;
+  background: #000000;
+}
+
+.testimonials h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #007bff;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: #111111;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #333;
+  transition: all 0.3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  border-color: #007bff;
+}
+
+.testimonial-content {
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-content p {
+  color: #cccccc;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  background: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.author-info h4 {
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.author-info span {
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.how-it-works {
+  padding: 5rem 0;
+  background: #111111;
+}
+
+.how-it-works h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #007bff;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.step {
+  text-align: center;
+  padding: 2rem;
+}
+
+.pricing-card h3 img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain; 
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: #007bff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 auto 1rem;
+}
+
+.step h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.step p {
+  color: #cccccc;
+}
+
+.contact {
+  padding: 5rem 0;
+  background: #000000;
+}
+
+.contact h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #007bff;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.contact-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+
+.contact-info p {
+  color: #cccccc;
+  margin-bottom: 2rem;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #cccccc;
+}
+
+.contact-method i {
+  color: #007bff;
+  font-size: 1.2rem;
+  width: 20px;
+}
+
+.contact-form {
+  background: #111111;
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid #333;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #666;
+}
+
+.submit-button {
+  width: 100%;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.footer {
+  background: #000000;
+  border-top: 1px solid #333;
+  padding: 3rem 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.footer-brand i {
+  margin-right: 0.5rem;
+  font-size: 2rem;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-column h4 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: #007bff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #333;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 70px;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.95);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    padding: 2rem 0;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .features h2,
+  .benefits h2,
+  .pricing h2,
+  .testimonials h2,
+  .how-it-works h2,
+  .contact h2 {
+    font-size: 2rem;
+  }
+
+  .feature-card,
+  .benefit-card,
+  .pricing-card,
+  .testimonial-card {
+    padding: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+}
+</style>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <i class="fas fa-robot"></i>
+                <span>HyzeN Solutions</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#bots">Bots</a></li>
+                <li><a href="#precos">Preços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="particles-container"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Automação Inteligente para seu Negócio</h1>
+            <p class="hero-subtitle">Revolucione sua empresa com bots de última geração que trabalham 24/7</p>
+            <p class="hero-description">Transforme processos, aumente vendas e otimize atendimento com inteligência artificial avançada.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('bots')">
+                    Conheça nossos bots
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('precos')">
+                    Ver preços
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="bots" class="features">
+        <div class="container">
+            <h2>Nossos Principais Bots</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Bot de Vendas</h3>
+                    <p>Automatize seu funil de vendas e converta mais leads em clientes</p>
+                    <ul>
+                        <li>Qualificação automática de leads</li>
+                        <li>Follow-up inteligente</li>
+                        <li>Integração com CRM</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Tickets com IA</h3>
+                    <p>Suporte ao cliente 24/7 com inteligência artificial avançada</p>
+                    <ul>
+                        <li>Respostas instantâneas</li>
+                        <li>Classificação automática</li>
+                        <li>Escalação inteligente</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>OAuth2 Seguro</h3>
+                    <p>Autenticação segura e integração com múltiplas plataformas</p>
+                    <ul>
+                        <li>Login social</li>
+                        <li>Segurança avançada</li>
+                        <li>Múltiplas integrações</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2>Por que escolher nossos bots?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="fas fa-plug"></i>
+                    <h3>Integração Simples</h3>
+                    <p>Configure em minutos e integre com suas ferramentas favoritas</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Automação Total</h3>
+                    <p>Deixe os bots trabalharem enquanto você foca no que importa</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Custo-Benefício</h3>
+                    <p>Reduza custos operacionais e aumente a produtividade</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="precos" class="pricing">
+        <div class="container">
+            <h2>Escolha seu Plano</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3><img src="robux.png" alt="Robux" style="width: 54px; height: 54px; vertical-align: middle; margin-right: 8px;"> Bot de Robux</h3>
+                    <div class="price">
+                        <span class="currency">R$</span>
+                        <span class="amount">97</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul>
+                        <li>🤖 1 Bot IA Turbinado</li>
+                        <li>⚡ 1.000 Vendas Automáticas</li>
+                        <li>📧 Suporte Ninja 24h</li>
+                        <li>🔥 Integração WhatsApp</li>
+                        <li>💎 Dashboard Exclusivo</li>
+                    </ul>
+                    <button class="pricing-button">Comprar</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">🏆 MAIS VENDIDO</div>
+                    <h3><img src="carrinho.png" alt="Carrinho" style="width: 54px; height: 54px; vertical-align: middle; margin-right: 8px;"> Bot de vendas</h3>
+                    <div class="price">
+                        <span class="currency">R$</span>
+                        <span class="amount">197</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul>
+                        <li>🚀 5 Bots IA Supremos</li>
+                        <li>💸 10.000 Vendas Explosivas</li>
+                        <li>⭐ Suporte VIP Instantâneo</li>
+                        <li>🔮 IA Preditiva Avançada</li>
+                        <li>📊 Analytics Futurístico</li>
+                        <li>🎯 Automação Total</li>
+                    </ul>
+                    <button class="pricing-button">Comprar</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>
+  <img src="ticket.png" alt="Ticket" style="width:38px; height:38px; vertical-align:middle; margin-right:8px; border-radius:12px;">
+  Bot de tickets
+</h3>
+                    <div class="price">
+                        <span class="currency">R$</span>
+                        <span class="amount">397</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul>
+                        <li>♾️ Bots IA Infinitos</li>
+                        <li>🌟 Vendas Sem Limites</li>
+                        <li>🛡️ Suporte Blindado 24/7</li>
+                        <li>⚙️ Customização Total</li>
+                        <li>👨‍💼 CEO Dedicado</li>
+                        <li>🏆 Acesso Beta Features</li>
+                    </ul>
+                    <button class="pricing-button">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>O que nossos clientes dizem</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4></h4>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4></h4>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4></h4>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>Como Funciona</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Escolha seu Bot</h3>
+                    <p>Selecione o bot que melhor atende suas necessidades</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Configure</h3>
+                    <p>Personalize as configurações em poucos cliques</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Integre</h3>
+                    <p>Conecte com suas ferramentas existentes</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Automatize</h3>
+                    <p>Deixe o bot trabalhar 24/7 para você</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Fale Conosco</h3>
+                    <p>Tem dúvidas? Nossa equipe está pronta para ajudar!</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@HyzeN Solutions.com</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fab fa-discord"></i>
+                            <span>Discord: HyzeN Solutions#1234</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>(11) 9999-9999</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Seu email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Sua mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-robot"></i>
+                    <span>HyzeN Solutions</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Produto</h4>
+                        <ul>
+                            <li><a href="#bots">Nossos Bots</a></li>
+                            <li><a href="#precos">Preços</a></li>
+                            <li><a href="#">Documentação</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Suporte</h4>
+                        <ul>
+                            <li><a href="#contato">Contato</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Tutoriais</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Empresa</h4>
+                        <ul>
+                            <li><a href="#">Sobre</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Carreiras</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HyzeN Solutions. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+
+const navToggle = document.querySelector(".nav-toggle")
+const navMenu = document.querySelector(".nav-menu")
+
+navToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active")
+})
+
+document.querySelectorAll(".nav-menu a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("active")
+  })
+})
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId)
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+}
+
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault()
+    const targetId = this.getAttribute("href").substring(1)
+    scrollToSection(targetId)
+  })
+})
+
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".header")
+  if (window.scrollY > 100) {
+    header.style.background = "rgba(0, 0, 0, 0.98)"
+  } else {
+    header.style.background = "rgba(0, 0, 0, 0.95)"
+  }
+})
+
+
+document.querySelector(".contact-form").addEventListener("submit", function (e) {
+  e.preventDefault()
+
+  const formData = new FormData(this)
+  const name = this.querySelector('input[type="text"]').value
+  const email = this.querySelector('input[type="email"]').value
+  const message = this.querySelector("textarea").value
+
+  if (!name || !email || !message) {
+    alert("Por favor, preencha todos os campos.")
+    return
+  }
+
+  const submitButton = this.querySelector(".submit-button")
+  const originalText = submitButton.textContent
+
+  submitButton.textContent = "Enviando..."
+  submitButton.disabled = true
+
+  setTimeout(() => {
+    alert("Mensagem enviada com sucesso! Entraremos em contato em breve.")
+    this.reset()
+    submitButton.textContent = originalText
+    submitButton.disabled = false
+  }, 2000)
+})
+
+
+document.querySelectorAll(".pricing-button").forEach((button) => {
+  button.addEventListener("click", function () {
+    const planName = this.closest(".pricing-card").querySelector("h3").textContent
+    alert(`Você selecionou o plano ${planName}. Redirecionando para o checkout...`)-
+  })
+})
+
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1"
+      entry.target.style.transform = "translateY(0)"
+    }
+  })
+}, observerOptions)
+
+document.querySelectorAll(".feature-card, .benefit-card, .pricing-card, .testimonial-card, .step").forEach((el) => {
+  el.style.opacity = "0"
+  el.style.transform = "translateY(30px)"
+  el.style.transition = "opacity 0.6s ease, transform 0.6s ease"
+  observer.observe(el)
+})
+
+function createParticles() {
+  const particlesContainer = document.querySelector(".particles-container")
+  const particleCount = 60
+
+  particlesContainer.innerHTML = ""
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement("div")
+    particle.className = "particle"
+
+    const size = Math.random() * 3 + 1
+    const x = Math.random() * 100
+    const y = Math.random() * 100
+    const duration = Math.random() * 6 + 4
+    const delay = Math.random() * 2
+
+    particle.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${x}%;
+      top: ${y}%;
+      animation: float ${duration}s ease-in-out infinite ${delay}s;
+      opacity: ${Math.random() * 0.5 + 0.3};
+    `
+
+    particlesContainer.appendChild(particle)
+  }
+}
+
+window.addEventListener("load", () => {
+  createParticles()
+})
+
+window.addEventListener("resize", () => {
+  createParticles()
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+  const botIcon = document.querySelector(".bot-animation i")
+  if (botIcon) {
+    setInterval(() => {
+      botIcon.style.transform = "rotate(360deg)"
+      setTimeout(() => {
+        botIcon.style.transform = "rotate(0deg)"
+      }, 1000)
+    }, 5000)
+  }
+})
+
+</script>
+</html>
