@@ -1,6 +1,6 @@
 # HyzeN-Solutions
 
-> Um simples simples, direto e rápido. 
+> Um site simples simples, direto e rápido. 
 
 ---
 
